@@ -20,8 +20,7 @@ export class PageTestComponent implements OnInit {
         console.log("ok");
         
         var tab=JSON.parse(data);
-        var nom2=tab.results[1].name;
-        console.log(nom2);
+       
         console.log(tab);
         console.log(that.nom);
         console.log(tab.count);
