@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
-
+import {Router, ActivatedRoute, Params} from '@angular/router';
 
 @Component({
   selector: 'app-page-test',
@@ -9,9 +9,14 @@ import * as $ from 'jquery';
 })
 export class PageTestComponent implements OnInit {
   nom="coucou";
+ 
  vartest= "valeur1";
-  constructor() { }
-
+  constructor(private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.queryParams.subscribe(params => {
+          var messageInscription = params["message"];
+          alert(messageInscription); // Print the parameter to the console. 
+      });}
+s
   ngOnInit(): void {
     this.vartest="val2";
     var that=this;
@@ -31,5 +36,8 @@ export class PageTestComponent implements OnInit {
       });
       
   }
+  
+    
+  
 
 }
