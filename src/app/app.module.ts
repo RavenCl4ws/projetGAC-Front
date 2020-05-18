@@ -19,6 +19,7 @@ import { PageArticleJeuComponent } from './page-article-jeu/page-article-jeu.com
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule
   ],
   providers: [],
