@@ -1,0 +1,12 @@
+#sidePanel {
+height: 100%;
+width: 20%;  
+position: absolute;; 
+right:0;
+background-color: rgb(175, 127, 127); 
+padding-top: 20px;
+}
+.card-group {
+    display: flex;
+    flex-direction: column;
+}
