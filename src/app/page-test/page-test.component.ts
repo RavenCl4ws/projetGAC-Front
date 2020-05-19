@@ -12,7 +12,7 @@ export class PageTestComponent implements OnInit {
   nom="coucou";
   status="statu pas implanté";
   registerForm: FormGroup;
-   
+  mail:String;
  vartest= "valeur1";
   constructor(private activatedRoute: ActivatedRoute) {
     this.activatedRoute.queryParams.subscribe(params => {
@@ -40,13 +40,14 @@ export class PageTestComponent implements OnInit {
   
 
   
-  onSubmit(){
+  onSubmit(mail){
     console.log("coucou onsubmit");
     $("#formulaire").submit(function(e){ // On sélectionne le formulaire par son identifiant
       console.log("in fonction submit");
       e.preventDefault();// Le navigateur ne peut pas envoyer le formulaire
       console.log("before donnee");
       console.log($(this));
+      console.log(mail);
       var donnees = $(this).serialize(); // On créer une variable content le formulaire sérialisé
       console.log(donnees);
       $.post(
