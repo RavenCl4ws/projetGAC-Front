@@ -8,6 +8,8 @@ import { PageTestComponent } from './page-test/page-test.component';
 import { AccueilComponent } from './accueil/accueil.component';
 import { PageInscriptionComponent } from './page-inscription/page-inscription.component';
 import { PageArticleJeuComponent } from './page-article-jeu/page-article-jeu.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { PageArticleJeuComponent } from './page-article-jeu/page-article-jeu.com
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [],

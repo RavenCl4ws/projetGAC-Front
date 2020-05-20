@@ -3,46 +3,50 @@
     
     http://localhost:8080/projetGAC/test <br>
     le jeu le plus attendu de 2020 selon rawg est :<br>
-   {{nom}}
+   {{nom2}}
   
+   <br>
+   json retour: {{Varjson}}
+   <br>
 </div>
-<form (ngSubmit)="onSubmit(mail)" id="formulaire" method="POST" action="http://localhost:8080/projetGAC/TestBase">
+<form #formInscription="ngForm" (ngSubmit)="functionSubmit(userAEnvoyer)">
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="inputEmail4">Email</label> <input type="email"
-                class="form-control" name="email" [(ngModel)]="mail" required>
+                class="form-control" [(ngModel)]="userAEnvoyer.email" name="email" required >
         </div>
         <div class="form-group col-md-6">
             <label for="inputPassword4">Mot de passe</label> <input
-                type="password" class="form-control" name="motPasse" required>
+                type="password" class="form-control" [(ngModel)]="userAEnvoyer.motPasse" name="motPasse"  required>
         </div>
 
         <div class="form-group col-md-6">
             <label for="inputAddress">Pseudo</label> <input type="text"
-                class="form-control" placeholder="Pseudo" name="pseudo" required>
+                class="form-control" placeholder="Pseudo" [(ngModel)]="userAEnvoyer.pseudo" name="pseudo" required>
             
         </div>
         <div class="form-group col-md-6">
             <label for="inputAdress">Nom</label> <input type="text"
-                class="form-control" placeholder="Nom" name="nom" required>
-        </div>
+                class="form-control" placeholder="Nom" [(ngModel)]="userAEnvoyer.nom" name="nom" required>
+               
+            </div>
         <div class="form-group col-md-6">
             <label for="inputAdress">Prénom</label> <input type="text"
-                class="form-control" placeholder="Prénom" name="prenom" required>
+                class="form-control" placeholder="Prénom" [(ngModel)]="userAEnvoyer.prenom" name="prenom" required>
         </div>
         <div class="form-group col-md-6">
             <label for="inputAdress">Date de Naissance</label> <input
-                type="text" class="form-control" name="dateNaissance" required>
+                type="text" class="form-control" [(ngModel)]="userAEnvoyer.dateNaissance" name="dateNaissance" required>
         </div>
         <div class="form-group col-md-6">
             <label for="inputAdress">Pays</label> <input type="text"
-                class="form-control" placeholder="France" name="pays" required>
+                class="form-control" placeholder="France" [(ngModel)]="userAEnvoyer.pays" name="pays" required>
         </div>
         <div class="form-group col-md-6">
             <label for="inputAdress">Numéro de Téléphone</label> <input
-                type="text" class="form-control" name="numeroTel" required>
+                type="text" class="form-control" [(ngModel)]="userAEnvoyer.numeroTel" name="numeroTel" required>
         </div>
     </div>
-    <button class="btn btn-primary" type="submit">ajouter</button>
-    <label>{{status}}</label>
+    <button class="btn btn-primary" type="submit" >ajouter</button>
+    <!-- <label>{{status}}</label> -->
 </form>
