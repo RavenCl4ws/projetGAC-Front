@@ -12,9 +12,12 @@ export class PageArticleJeuComponent implements OnInit {
   nomJeu: String;
   description;
   image;
+  galerie={};
   classements;
-  stores;
-  plateformes;
+  myArrStores=[];
+  plateformes={};
+  trailer;
+  createurs={};
 
   constructor( ) { }
 
@@ -26,18 +29,35 @@ export class PageArticleJeuComponent implements OnInit {
     // console.log("log on init randomId : "+randomId);
     // console.log(this.URLConstructor(randomId));
     $.get(this.URLConstructor(randomId),function(data){
-      console.log(data);
+      // console.log(data);
       that.nomJeu=data.name;
       that.description=data.description_raw;
       that.image=data.background_image;
       that.plateformes=data.plateforms;
-      that.stores=data.stores;
+      // console.log("plateformes: "+that.plateformes)
+
+      let arrayStoreRecu=data.stores;
+      console.log(arrayStoreRecu);
+      // for(let i=0; i<sizeArrayStore;i++)
+      arrayStoreRecu.forEach(element => 
+      {
+        console.log("avec this: "+element.store.name);
+        console.log("sans this: "+element.store.name);
+        let store={nomStore:element.store.name,urlProduit:element.url};
+        console.log(store);
+        that.myArrStores.push(store);
+        console.log(that.myArrStores)
+      });
+     console.log("apres for")
+      // console.log("stores: "+that.stores)
+
     });  
   }
   URLConstructor(randomInt){
     var URLapi="https://api.rawg.io/api";
     var selector="/games";
-    var parameter="/"+250000;
+    var parameter="/"+41494;
+    //41494
     var URLGenerated=(URLapi+selector+parameter);
     console.log(URLGenerated);
     return (URLGenerated)

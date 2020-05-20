@@ -1,25 +1,58 @@
-<div class="contenu">
-    <table width="100%">
-        <tbody>
-            <tr>
-                <td class="borderClass" width="225" >
-                    <div class="image" style="width:225px"><img src={{image}} style="width:225px"></div>
-                </td>
-                <td >
-                    <h1 class="nom">{{nomJeu}}</h1><br>
-                    <div class="description">{{description}}</div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="arboressence">
-
+<div class="container ">
+    <div class="d-flex flex-row justify-content-center flex-wrap">
+        <div class="nom d-flex col-md-10  box">
+            <h1>{{nomJeu}}</h1>
+        </div>
+        <div class="sidebar d-flex col-md-3 align-content-stretch flex-column box">
+            <div class="image">
+                <img src={{image}} alt={{nomJeu}}>
+            </div>
+            <div class="manote  box">
+                ma note
+            </div>
+            <button type="button" class="btn btn-outline-success btn-block">Ajouter à "mes Jeux"</button>
+            <button type="button" class="btn btn-outline-primary btn-block">Ajouter à "mes Souhaits"</button>
+            <div class="plateformes  box">
+                ici les icones de plateformes
+            </div>
+            <div class="stores  box">
+                ici les stores:
+                <div class="groupeBoutonsStores" *ngFor="let store of myArrStores">
+                    <a href={{store.urlProduit}}>
+                        <button type="button" class="btn btn-outline-success btn-block">{{store.nomStore}}</button>
+                    </a> 
+                </div>
+            </div>
+        </div>
+        <div class="content d-flex col-md-7 align-content-stretch box">
+            <div class="container flex-row d-flex justify-content-start flex-wrap box">
+                <div class="col1content col-md-7 box">
+                    <div class="notes box">
+                       <h1>ici date de sortie</h1> <!-- {{notes}} -->
+                    </div>
+                    <div class="plateformes box">
+                        <h1>ici les notes</h1>
+                    </div>
+                </div>
+                <div class="col2content col-md-4 offset-md-1 box">
+                    <div class="trailer">
+                        <h1>ici le trailer></h1>
+                    </div>
+                </div>
+                <div class="description col-md-10 offset-md-1 box">
+                    <h1>Description</h1>
+                    {{description}}
+                </div>
+                <div class="description col-md-10 offset-md-1 box">
+                    <h1>Createurs</h1>
+                    Ici les createurs<!-- {{createurs}} -->
+                </div>
+                <div class="description col-md-10 offset-md-1 box">
+                   
+                </div>
+            </div>
+        
+            
+        </div>
     </div>
-    <div class="images"></div>
 </div>
-<h1 class="nom">{{nomJeu}}</h1>
-<div class="description">{{description}}</div>
-<div classe="image"><img src={{image}}></div>
-<div class="plateformes">{{plateformes}}</div>
-<div class="buy">{{stores}}</div>
-<div class="classement">{{classements}}</div>
