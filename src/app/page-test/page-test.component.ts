@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import * as $ from 'jquery';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import { FormGroup } from '@angular/forms';

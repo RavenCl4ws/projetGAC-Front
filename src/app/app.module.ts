@@ -9,6 +9,10 @@ import { AccueilComponent } from './accueil/accueil.component';
 import { PageInscriptionComponent } from './page-inscription/page-inscription.component';
 import { PageArticleJeuComponent } from './page-article-jeu/page-article-jeu.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CarouselComponent } from './carousel/carousel.component';
+import { CardGroupComponent } from './card-group/card-group.component';
+import { SidePanelComponent } from './side-panel/side-panel.component';
+import { EncartProfilComponent } from './encart-profil/encart-profil.component';
 
 
 @NgModule({
@@ -17,7 +21,11 @@ import { HttpClientModule } from '@angular/common/http';
     PageTestComponent,
     AccueilComponent,
     PageInscriptionComponent,
-    PageArticleJeuComponent
+    PageArticleJeuComponent,
+    CarouselComponent,
+    CardGroupComponent,
+    SidePanelComponent,
+    EncartProfilComponent
   ],
   imports: [
     BrowserModule,

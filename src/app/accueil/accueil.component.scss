@@ -1,12 +1,14 @@
-#carouselExampleCaptions {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    margin-left: auto;
-    margin-right: auto;
-    width: 70%;
-}
-
-.card-deck {
-    margin: 2rem;
+#top_element {
     
+    display: flex;
+    flex-wrap : nowwrap;
 }
+#element_centre {
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  #element_side {
+      width: 20%;
+      right:0;
+  }
