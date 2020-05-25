@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  id;
   title = 'projetGAC';
+  ngOnInit(): void {
+    this.id = localStorage.getItem('token');
+    console.log(this.id);
+  }
+  
+  
 }

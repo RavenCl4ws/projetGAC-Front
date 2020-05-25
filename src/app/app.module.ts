@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule} from '@angular/forms';
-
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { AuthGuard } from './guards/auth.guard';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PageTestComponent } from './page-test/page-test.component';
@@ -13,6 +13,9 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { CardGroupComponent } from './card-group/card-group.component';
 import { SidePanelComponent } from './side-panel/side-panel.component';
 import { EncartProfilComponent } from './encart-profil/encart-profil.component';
+import { AuthentificationComponent } from './authentification/authentification.component';
+import { DecouvrirComponent } from './decouvrir/decouvrir.component';
+import { PageProfilComponent } from './page-profil/page-profil.component';
 
 
 @NgModule({
@@ -25,15 +28,19 @@ import { EncartProfilComponent } from './encart-profil/encart-profil.component';
     CarouselComponent,
     CardGroupComponent,
     SidePanelComponent,
-    EncartProfilComponent
+    EncartProfilComponent,
+    AuthentificationComponent,
+    DecouvrirComponent,
+    PageProfilComponent
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
