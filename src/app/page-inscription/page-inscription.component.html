@@ -1,40 +1,42 @@
 <h1>Veuillez vous inscrire pour profiter pleinement des services proposés par notre merveilleux site!</h1>
-<form action="http://localhost:8080/projetGAC/TestInscription" method="POST" class="text-light">
+<form #formInscription="ngForm" (ngSubmit)="functionSubmit(userAEnvoyer)">
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="inputEmail4">Email</label> <input type="email"
-                class="form-control" name="email" required>
+                class="form-control"  placeholder="email@email.com" [(ngModel)]="userAEnvoyer.email" name="email" required >
         </div>
         <div class="form-group col-md-6">
             <label for="inputPassword4">Mot de passe</label> <input
-                type="password" class="form-control" name="motPasse" required>
+                type="password" class="form-control"  placeholder="Mot de passe" [(ngModel)]="userAEnvoyer.motPasse" name="motPasse"  required>
         </div>
 
         <div class="form-group col-md-6">
             <label for="inputAddress">Pseudo</label> <input type="text"
-                class="form-control" placeholder="Pseudo" name="pseudo" required>
+                class="form-control" placeholder="Pseudo" [(ngModel)]="userAEnvoyer.pseudo" name="pseudo" required>
             
         </div>
         <div class="form-group col-md-6">
             <label for="inputAdress">Nom</label> <input type="text"
-                class="form-control" placeholder="Nom" name="nom">
-        </div>
+                class="form-control" placeholder="Nom" [(ngModel)]="userAEnvoyer.nom" name="nom" >
+               
+            </div>
         <div class="form-group col-md-6">
             <label for="inputAdress">Prénom</label> <input type="text"
-                class="form-control" placeholder="Prénom" name="prenom">
+                class="form-control" placeholder="Prénom" [(ngModel)]="userAEnvoyer.prenom" name="prenom">
         </div>
         <div class="form-group col-md-6">
             <label for="inputAdress">Date de Naissance</label> <input
-                type="text" class="form-control" name="dateNaissance">
+                type="text" class="form-control"  placeholder="01/01/2000" [(ngModel)]="userAEnvoyer.dateNaissance" name="dateNaissance" >
         </div>
         <div class="form-group col-md-6">
             <label for="inputAdress">Pays</label> <input type="text"
-                class="form-control" placeholder="France" name="pays">
+                class="form-control" placeholder="France" [(ngModel)]="userAEnvoyer.pays" name="pays" >
         </div>
         <div class="form-group col-md-6">
             <label for="inputAdress">Numéro de Téléphone</label> <input
-                type="text" class="form-control" name="numeroTel">
+                type="text" class="form-control" placeholder="0123456789" [(ngModel)]="userAEnvoyer.numeroTel" name="numeroTel">
         </div>
     </div>
-    <button type="submit" class="btn btn-primary" value="TestInscription">S'inscrire</button>
+    <button class="btn btn-primary" type="submit" >S'inscrire</button>
+    
 </form>
