@@ -9,13 +9,19 @@ import * as $ from 'jquery';
 })
 
 export class PageArticleJeuComponent implements OnInit {
-  nomJeu: String;
+  nomJeu: String; // à envoyer au servlet
+  genrePrincipal; // à envoyer au servlet
+  notePerso; // à envoyer au servlet
+  noteMetacritic; //si pas note moyenne mettre celle-ci
+  noteMoyenne; // recevoir du servlet
   description;
   image;
   galerie={};
   classements;
   myArrStores=[];
-  plateformes={};
+  myArrPlateformes=[];
+  myArrLogosPlateformes=[];
+  dateSortie;
   trailer;
   createurs={};
 
@@ -29,34 +35,75 @@ export class PageArticleJeuComponent implements OnInit {
     // console.log("log on init randomId : "+randomId);
     // console.log(this.URLConstructor(randomId));
     $.get(this.URLConstructor(randomId),function(data){
-      // console.log(data);
+      console.log(data);
+
       that.nomJeu=data.name;
       that.description=data.description_raw;
       that.image=data.background_image;
-      that.plateformes=data.plateforms;
+     
       // console.log("plateformes: "+that.plateformes)
 
+// STORES
       let arrayStoreRecu=data.stores;
       console.log(arrayStoreRecu);
-      // for(let i=0; i<sizeArrayStore;i++)
       arrayStoreRecu.forEach(element => 
       {
-        console.log("avec this: "+element.store.name);
-        console.log("sans this: "+element.store.name);
         let store={nomStore:element.store.name,urlProduit:element.url};
-        console.log(store);
+        // console.log(store);
         that.myArrStores.push(store);
-        console.log(that.myArrStores)
+        // console.log(that.myArrStores)
       });
-     console.log("apres for")
+      //  console.log("apres for")
       // console.log("stores: "+that.stores)
+
+//PLATEFORMS
+      //listes consoles
+      let arrayPlatRecu=data.platforms;
+      console.log(arrayPlatRecu);
+      arrayPlatRecu.forEach(element => 
+      {
+        let plateforme={nomPlateforme:element.platform.name};
+        that.dateSortie=element.released_at;
+        console.log(plateforme);
+        that.myArrPlateformes.push(plateforme);
+        console.log(that.myArrPlateformes)
+      });
+      //logo plateformes
+      let arrayPlatMereRecu=data.parent_platforms;
+      console.log(arrayPlatMereRecu);
+      arrayPlatMereRecu.forEach(element => 
+        {let logoPlateforme;
+        if(element.platform.name=="PC"){
+          logoPlateforme="../assets/img/logos/logo_pc.png";
+        }
+        else if(element.platform.name=="PlayStation"){
+          logoPlateforme="../assets/img/logos/logo_playstation.png";
+        }
+        else if(element.platform.name=="Xbox"){
+          logoPlateforme="../assets/img/logos/logo_xbox.png";
+        }
+        else if(element.platform.name=="Nintendo"){
+          logoPlateforme="../assets/img/logos/logo_nintendo.png";
+        }
+        else if(element.platform.name=="iOS"||element.platform.name=="Android"){
+          logoPlateforme="../assets/img/logos/logo_mobile.png";
+        }
+        else if(element.platform.name=="Apple Macintosh"){
+          logoPlateforme="../assets/img/logos/logo_mac.png";
+        }
+        else{
+          logoPlateforme="../assets/img/logos/logo_noIcon.png";
+        }
+        
+        that.myArrLogosPlateformes.push(logoPlateforme);
+      });
 
     });  
   }
   URLConstructor(randomInt){
     var URLapi="https://api.rawg.io/api";
     var selector="/games";
-    var parameter="/"+41494;
+    var parameter="/"+22509;
     //41494
     var URLGenerated=(URLapi+selector+parameter);
     console.log(URLGenerated);
