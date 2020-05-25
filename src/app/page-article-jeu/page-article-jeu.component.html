@@ -13,7 +13,10 @@
             <button type="button" class="btn btn-outline-success btn-block">Ajouter à "mes Jeux"</button>
             <button type="button" class="btn btn-outline-primary btn-block">Ajouter à "mes Souhaits"</button>
             <div class="plateformes  box">
-                ici les icones de plateformes
+                Plateformes:
+                <div class="logos d-inline-block" *ngFor="let logo of myArrLogosPlateformes">
+                    <img src="{{logo}}">
+                </div>
             </div>
             <div class="stores  box">
                 ici les stores:
@@ -28,7 +31,9 @@
             <div class="container flex-row d-flex justify-content-start flex-wrap box">
                 <div class="col1content col-md-7 box">
                     <div class="notes box">
-                       <h1>ici date de sortie</h1> <!-- {{notes}} -->
+                       <h1>ici date de sortie:
+                           {{dateSortie}}
+                       </h1> 
                     </div>
                     <div class="plateformes box">
                         <h1>ici les notes</h1>
@@ -43,12 +48,20 @@
                     <h1>Description</h1>
                     {{description}}
                 </div>
-                <div class="description col-md-10 offset-md-1 box">
+                <div class="createurs col-md-10 offset-md-1 box">
                     <h1>Createurs</h1>
                     Ici les createurs<!-- {{createurs}} -->
                 </div>
-                <div class="description col-md-10 offset-md-1 box">
+                <div class="plateformes col-md-10 offset-md-1 box" >
+                   <h1>plateformes</h1>
+                   <div *ngFor="let plateformes of myArrPlateformes">
+                        {{plateformes.nomPlateforme}} <br>
+                   </div>
                    
+                </div>
+                <div class="galerie col-md-10 offset-md-1 box">
+                   <h1>Galerie</h1>
+                   ici des photos
                 </div>
             </div>
         
