@@ -14,8 +14,12 @@ export class CarouselComponent implements OnInit {
 	@Input() status : string;
 	@Input() page : string;
 
+	// Info reçues du profil
+
+	nomJeuProfil: string;
 	
 	// Paramètres jeu
+
 	nomJeu: String;
 	description;
 	image;
@@ -23,51 +27,60 @@ export class CarouselComponent implements OnInit {
 	stores;
 	plateformes;
 	
-	// Instances jeux
-
-	jeu1=[];
-	jeu2=[];
 
 	// tableau jeux
 
-	contenu = [];
+	arrayJeuxSugg = [];
 
 	constructor() { }
 
 	ngOnInit(): void {
 				var that=this;
 				var randomId=this.RandomIdGenerator(350000);
-		
-				console.log(this.page);
-				console.log(this.status);
-				// console.log("log on init randomId : "+randomId);
-				// console.log(this.URLConstructor(randomId));
-				$.get(this.URLConstructor(randomId),function(data){
-					that.nomJeu=data.name;
-					that.description=data.description_raw;
-					that.image=data.background_image;
-					that.plateformes=data.plateforms;
-					that.stores=data.stores;
-				});  
+				
+
+
+			
+				// Requête
 				
 					if (this.page=="accueil" && this.status=="connecte") {
 						console.log("début du if");
-						$.get(this.URLConstructor2(this.RandomIdGenerator),function(data){
-							that.nomJeu=data.name;
+						$.get(this.URLConstructorSugg(this.nomJeuProfil),function(data){
+							console.log(data);
+							let arrayJeuxSuggRecu = data.results;
+							console.log(arrayJeuxSuggRecu);
+							arrayJeuxSuggRecu.forEach(element => {
+								let jeuxSugg={nomJeu:element.name, description:element.short_description, plateformes:element.parent_platforms, image:element.background_image};
+								that.arrayJeuxSugg.push(jeuxSugg);
+								console.log(that.arrayJeuxSugg);
+							});
+						})}
+		
+					else if (this.page == "accueil" && this.status=="") {
+						console.log("début du else if");
+						$.get(this.URLConstructor(randomId),function(data){
+							
 							that.description=data.description_raw;
 							that.image=data.background_image;
 							that.plateformes=data.plateforms;
-							that.stores=data.stores;
-						}); 
-						// this.contenu = [this.jeu1, this.jeu2];
-						// this.jeu1=[this.nomJeu, this.description, this.image, this.plateformes];
-							}
-							// else if (this.page == "accueil") {
-						
-							// }
+							that.nomJeu=data.name;
+							})}
 				
 			}
-			URLConstructor(randomInt){
+
+			// CONSTRUCTEURS D'URL
+
+			URLConstructorSugg(nomJeuProfil){
+					
+				this.nomJeuProfil="Minecraft";                                 // a récuperer !
+				var URLapi="https://api.rawg.io/api";
+				var selector="/games";
+				var parameter="/"+this.nomJeuProfil+"/suggested";
+				var URLGenerated=(URLapi+selector+parameter);
+				return (URLGenerated)
+			}
+
+				URLConstructor(randomInt) {
 				var URLapi="https://api.rawg.io/api";
 				var selector="/games";
 				var parameter="/"+randomInt;
@@ -75,14 +88,9 @@ export class CarouselComponent implements OnInit {
 				console.log(URLGenerated);
 				return (URLGenerated)
 			}
-			URLConstructor2(randomInt){
-				var URLapi="https://api.rawg.io/api";
-				var selector="/games";
-				var parameter="/"+250001;
-				var URLGenerated2=(URLapi+selector+parameter);
-				console.log(URLGenerated2);
-				return (URLGenerated2)
-			}
+				
+			
+			
 			RandomIdGenerator(max){
 				var randomInt=(Math.floor(Math.random() * Math.floor(max)));
 				console.log("log random int: "+randomInt)
