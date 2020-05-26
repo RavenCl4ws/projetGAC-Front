@@ -16,6 +16,7 @@ import { EncartProfilComponent } from './encart-profil/encart-profil.component';
 import { AuthentificationComponent } from './authentification/authentification.component';
 import { DecouvrirComponent } from './decouvrir/decouvrir.component';
 import { PageProfilComponent } from './page-profil/page-profil.component';
+import { ListeComponent } from './liste/liste.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { PageProfilComponent } from './page-profil/page-profil.component';
     EncartProfilComponent,
     AuthentificationComponent,
     DecouvrirComponent,
-    PageProfilComponent
+    PageProfilComponent,
+    ListeComponent
   ],
   imports: [
     BrowserModule,
