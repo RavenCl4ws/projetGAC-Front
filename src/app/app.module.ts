@@ -17,6 +17,8 @@ import { AuthentificationComponent } from './authentification/authentification.c
 import { DecouvrirComponent } from './decouvrir/decouvrir.component';
 import { PageProfilComponent } from './page-profil/page-profil.component';
 import { SafePipe } from './safe.pipe';
+import { ListeComponent } from './liste/liste.component';
+
 
 
 @NgModule({
@@ -33,7 +35,9 @@ import { SafePipe } from './safe.pipe';
     AuthentificationComponent,
     DecouvrirComponent,
     PageProfilComponent,
-    SafePipe
+    SafePipe,
+    ListeComponent,
+
   ],
   imports: [
     BrowserModule,
