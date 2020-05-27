@@ -1,13 +1,3 @@
-
-
-
-
-
-
-
-
-
-
 .container{
     max-width: 100%;
 }
@@ -20,6 +10,50 @@ width: 25px;
 margin:5px 5px;
 }
 .box{
-    border:solid;
-    border-radius: 1rem;
+    padding: left right 0; 
+    border-style: outset;
+    border-color: lightgray;
+    border-radius: 0.5em;
 }
+.contenuCourt{
+    height: auto;
+}
+.contenu{
+    font-size: 16px;
+    line-height: 16px;
+    height: 60px;
+    overflow: hidden;
+    padding: none;
+}
+.boutonShow{
+    border-style: none;
+    border-top: solid;
+    border-top-color: lightgray;
+    border-top-width: thin;
+    background-color: white;
+}
+.show{
+    overflow: visible;
+    height: auto;
+}
+.badge{
+    margin-bottom: 0.5em;
+}
+//RATING PERSO
+.rating {
+    direction: rtl;
+    padding: none;
+ }
+ .rating a {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 3em;
+    transition: color .4s;
+ }
+ .rating a:hover,
+ .rating a:focus,
+ .rating a:hover ~ a,
+ .rating a:focus ~ a {
+    color: orange;
+    cursor: pointer;
+ }

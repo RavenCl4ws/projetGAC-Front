@@ -55,9 +55,10 @@ export class AuthentificationComponent implements OnInit {
     }
     else {  //CHANGER CETTE PARTIE AVEC LA REQUETE AU SERVLET
       this.coupleUserMdp = { pseudo: this.f.userid.value, motPasse: this.f.password.value }
-      this.http.post(this.url, this.coupleUserMdp, { responseType: 'json' }).toPromise().then((data: string) => {
+      this.http.post(this.url, this.coupleUserMdp, { responseType: 'json' }).toPromise().then((data) => {
 
         this.reponse = data;
+        console.log("this.reponse.id:"+this.reponse.id);
         console.log("la reponse:" + this.reponse);
         if (this.reponse == "texteErreur") {
           this.router.navigate(['/authentification']);
@@ -65,10 +66,16 @@ export class AuthentificationComponent implements OnInit {
 
         }
         else {
+         
           console.log("Login successful");
+          console.log("this.reponse.id:"+this.reponse.id);
           //this.authService.authLogin(this.model);  
+         
           localStorage.setItem('isLoggedIn', "true");
-          localStorage.setItem('token', this.f.userid.value);
+          //localStorage.setItem('token', this.f.userid.value)
+          localStorage.setItem('pseudo', this.reponse.pseudo);
+          localStorage.setItem('idUser',this.reponse.id);
+
           this.router.navigate([this.returnUrl]);
         }
 
