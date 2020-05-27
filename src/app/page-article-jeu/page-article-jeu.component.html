@@ -7,61 +7,88 @@
             <div class="image">
                 <img src={{image}} alt={{nomJeu}}>
             </div>
-            <div class="manote  box">
-                ma note
+            <div class="maNote contenuCourt  box " *ngIf="connecte; else elseBlock">
+                <div class="rating container-fluid d-flex justify-content-around">
+                    <a (click) = "onClickRate(5)" title="Donner 5 étoiles">☆</a>
+                    <a (click) = "onClickRate(4)" title="Donner 4 étoiles">☆</a>
+                    <a (click) = "onClickRate(3)" title="Donner 3 étoiles">☆</a>
+                    <a (click) = "onClickRate(2)" title="Donner 2 étoiles">☆</a>
+                    <a (click) = "onClickRate(1)" title="Donner 1 étoile">☆</a>
+                </div>
             </div>
-            <button type="button" class="btn btn-outline-success btn-block">Ajouter à "mes Jeux"</button>
-            <button type="button" class="btn btn-outline-primary btn-block">Ajouter à "mes Souhaits"</button>
-            <div class="plateformes  box">
-                Plateformes:
+            <ng-template #elseBlock><button type="button" class="btn btn-outline-success btn-block" (click) = "onClickRate(-1)">noter ce jeu</button></ng-template>
+            <button type="button" class="btn btn-outline-success btn-block" (click) = "onClickAdd()">Ajouter à "mes Jeux"</button>
+            <!-- <button type="button" class="btn btn-outline-primary btn-block">Ajouter à "mes Souhaits"</button> -->
+            <div class="plateformes  box d-flex justify-content-center">
                 <div class="logos d-inline-block" *ngFor="let logo of myArrLogosPlateformes">
-                    <img src="{{logo}}">
+                    <img src="{{logo.logoPlateforme}}" title="{{logo.nomPlateforme}}">
                 </div>
             </div>
             <div class="stores  box">
                 ici les stores:
                 <div class="groupeBoutonsStores" *ngFor="let store of myArrStores">
                     <a href={{store.urlProduit}}>
-                        <button type="button" class="btn btn-outline-success btn-block">{{store.nomStore}}</button>
+                        <button type="button" class="btn btn-outline-dark btn-block">{{store.nomStore}}</button>
                     </a> 
                 </div>
             </div>
         </div>
         <div class="content d-flex col-md-7 align-content-stretch box">
             <div class="container flex-row d-flex justify-content-start flex-wrap box">
-                <div class="col1content col-md-7 box">
-                    <div class="notes box">
-                       <h1>ici date de sortie:
+                <div class="col1content flex-row d-flex flex-wrap justify-content-between col-md-7 box">
+                    <div class="date box col-md-4" >
+                           sortie: <br>
                            {{dateSortie}}
-                       </h1> 
                     </div>
-                    <div class="plateformes box">
-                        <h1>ici les notes</h1>
+                    <div class="noteMeta box col-md-3" >
+                        note metacritic: <br>
+                        {{noteMeta}} 
+                    </div>
+                    <div class="noteWhatcha box col-md-3" >
+                        notre note:<br>
+                    </div> 
+                    <div class="genre box col-md-10 offset-md-1">
+ <!-- JARIV PAS AMETTRE EN FORME -->
+                        <div class="groupeBoutonsGenre d-flex justify-content-around " *ngFor="let genre of myArrGenres">
+                            <span>
+                                <a href=# class="badge badge-secondary badge-sm">
+                                {{genre.nomGenre}}
+                                </a>
+                            </span>
+                        </div>
                     </div>
                 </div>
-                <div class="col2content col-md-4 offset-md-1 box">
-                    <div class="trailer">
-                        <h1>ici le trailer></h1>
-                    </div>
+                <div class="col2content trailer col-md-5 box">
+                            <iframe width="100%" height="100%" [src]="myClip | safe" allowfullscreen></iframe>
                 </div>
-                <div class="description col-md-10 offset-md-1 box">
-                    <h1>Description</h1>
-                    {{description}}
+                <div class="description col-md-10 offset-md-1 box justify-content-center">
+                    <h3>Description</h3>
+                    <div class="contenu" [class.show]="show">
+                        {{description}}
+                    </div>
+                    <button class="boutonShow btn-block btn-light" (click)="show = !show" >{{ show ? 'Show less': 'Show More' }}</button>
                 </div>
                 <div class="createurs col-md-10 offset-md-1 box">
-                    <h1>Createurs</h1>
-                    Ici les createurs<!-- {{createurs}} -->
+                    <h3>Developpeurs:</h3>
+                    <div class="contenuCourt d-flex justify-content-around">
+                        <span class="badge-pill badge-info developpeur" *ngFor="let dev of myArrDev">
+                            {{dev.nomDeveloppeur}}
+                        </span>
+                    </div>
                 </div>
-                <div class="plateformes col-md-10 offset-md-1 box" >
-                   <h1>plateformes</h1>
-                   <div *ngFor="let plateformes of myArrPlateformes">
-                        {{plateformes.nomPlateforme}} <br>
-                   </div>
-                   
+                <div class="plateformes col-md-10 offset-md-1 box justify-content-around" >
+                    <h3>plateformes</h3>
+                    <div class="contenu d-flex justify-content-around flex-wrap" [class.show]="show">
+                        <span class="btn btn-outline-secondary" *ngFor="let plateformes of myArrPlateformes">
+                            {{plateformes.nomPlateforme}} <br>
+                        </span>
+                    </div>
+                    <button class="boutonShow btn-block btn-light" (click)="show = !show" >{{ show ? 'Show less': 'Show More' }}</button>    
                 </div>
                 <div class="galerie col-md-10 offset-md-1 box">
-                   <h1>Galerie</h1>
+                   <h3>Galerie</h3>
                    ici des photos
+                   
                 </div>
             </div>
         
