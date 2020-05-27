@@ -43,6 +43,25 @@ export class ListeComponent implements OnInit {
       })
 
     }
+    else if (this.page == "classement" && this.status == "") {
+
+      $.get(URLConstructorRating(), function (data) {
+        console.log(data);
+        let arrayJeuxRatingRecu = [];
+        for (var i = 0; i < 100; i++) {
+          arrayJeuxRatingRecu.push(data.results[i]);
+        }
+        console.log(arrayJeuxRatingRecu);
+        arrayJeuxRatingRecu.forEach(element => {
+          let jeuxRating = { nomJeu: element.name, dateSortie: element.released, note: element.rating, plateformes: element.parent_platforms, image: element.background_image };
+          that.arrayJeuxRating.push(jeuxRating);
+          console.log(that.arrayJeuxRating);
+        });
+      })
+
+    }
+
+
     // CONSTRUCTEURS D'URL
 
     function URLConstructorRating() {

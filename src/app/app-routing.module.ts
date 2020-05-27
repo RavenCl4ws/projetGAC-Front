@@ -7,7 +7,7 @@ import { PageArticleJeuComponent } from './page-article-jeu/page-article-jeu.com
 import { PageProfilComponent } from './page-profil/page-profil.component';
 import { AuthentificationComponent } from './authentification/authentification.component';
 import { AuthGuard } from './guards/auth.guard';
-
+import { PageClassementComponent } from './page-classement/page-classement.component';
 
 const routes: Routes = [
   {path:'test', component: PageTestComponent},
@@ -16,6 +16,7 @@ const routes: Routes = [
   {path:'decouvrir', component: PageArticleJeuComponent},
   {path:'profil', component: PageProfilComponent,canActivate : [AuthGuard]},
   {path:'authentification', component: AuthentificationComponent},
+  {path:'classement', component: PageClassementComponent},
 ];
 
 @NgModule({

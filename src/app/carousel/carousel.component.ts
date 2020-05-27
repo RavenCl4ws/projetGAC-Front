@@ -11,6 +11,7 @@ import { templateJitUrl } from '@angular/compiler';
 })
 export class CarouselComponent implements OnInit {
 	// INPUTS
+
 	@Input() status: string;
 	@Input() page: string;
 
@@ -32,7 +33,6 @@ export class CarouselComponent implements OnInit {
 	stores;
 	plateformes;
 
-
 	// tableau jeux
 
 	arrayJeuxSugg = [];
@@ -44,9 +44,10 @@ export class CarouselComponent implements OnInit {
 		var that = this;
 		var randomId = this.RandomIdGenerator(350000);
 		this.dates = 2020;
-
-
+		
+		
 		// REQUETES
+console.log(this.status);
 
 		if (this.page == "accueil" && this.status == "connecte") {
 			console.log("début du if");
@@ -83,7 +84,7 @@ export class CarouselComponent implements OnInit {
 
 	URLConstructorSugg(nomJeuProfil) {
 
-		this.nomJeuProfil = "Minecraft";                                 // a récuperer !
+		this.nomJeuProfil = "Minecraft";                                 // a récuperer (GENRES) !
 		var URLapi = "https://api.rawg.io/api";
 		var selector = "/games";
 		var parameter = "/" + this.nomJeuProfil + "/suggested";

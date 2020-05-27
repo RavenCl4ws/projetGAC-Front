@@ -18,6 +18,9 @@ import { DecouvrirComponent } from './decouvrir/decouvrir.component';
 import { PageProfilComponent } from './page-profil/page-profil.component';
 import { SafePipe } from './safe.pipe';
 import { ListeComponent } from './liste/liste.component';
+import { PageClassementComponent } from './page-classement/page-classement.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+// import { JwPaginationComponent } from 'jw-angular-pagination';
 
 
 
@@ -37,6 +40,8 @@ import { ListeComponent } from './liste/liste.component';
     PageProfilComponent,
     SafePipe,
     ListeComponent,
+    PageClassementComponent,
+    // JwPaginationComponent
 
   ],
   imports: [
@@ -44,7 +49,8 @@ import { ListeComponent } from './liste/liste.component';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxPaginationModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
