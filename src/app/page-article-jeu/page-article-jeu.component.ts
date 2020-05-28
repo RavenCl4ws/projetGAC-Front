@@ -4,21 +4,23 @@ declare var $ : any;
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';  
 
+import { templateJitUrl } from '@angular/compiler';
 
 @Component({
   selector: 'app-page-article-jeu',
   templateUrl: './page-article-jeu.component.html',
-  styleUrls: ['./page-article-jeu.component.scss']
+  styleUrls: ['./page-article-jeu.component.scss'],
+  template:'idJeu:{{randomId}}'
 })
 
 export class PageArticleJeuComponent implements OnInit {
   idJeuInput=12;
-  @Input() idJeu;
+  @Input() idJeu:string;
 
   connecte:boolean=false;
   show=false;
 
-
+  mySubscription:any;
   nomJeu: String; // à envoyer au servlet
   genrePrincipal; // à envoyer au servlet
   notePerso; // à envoyer au servlet
@@ -45,7 +47,18 @@ ToastAdd:boolean;
   constructor( 
               private http: HttpClient, 
               private router: Router,
-              ){ }
+              ){
+            //     this.router.routeReuseStrategy.shouldReuseRoute = function () {
+            //     return false;
+            //   };
+              
+            //   this.mySubscription = this.router.events.subscribe((event) => {
+            //     if (event instanceof this.onClickRate) {
+            //       // Trick the Router into believing it's last link wasn't previously loaded
+            //       this.router.navigated = false;
+            //     }
+            //   });
+             }
 
   ngOnInit(): void {
     var that=this;
@@ -54,7 +67,7 @@ ToastAdd:boolean;
       this.connecte=true;
     }else{this.connecte=false};
 
-    $.get(this.URLConstructor(randomId),function(data){
+    $.get(this.URLConstructor(this.idJeu),function(data){
       console.log(data);
 
       that.nomJeu=data.name;
@@ -177,6 +190,7 @@ ToastAdd:boolean;
        this.retourAjoutJeu = data;
       console.log("la reponse:" + this.retourAjoutJeu);
       this.displayToastAdd();
+      location.reload();
   });
   
   }
@@ -190,6 +204,7 @@ ToastAdd:boolean;
        this.retourAjoutNote = data;
       console.log("la reponse:" + this.retourAjoutNote);
       this.displayToastNote();
+      location.reload();
   });
     }
   // this.afficheNote();
@@ -200,7 +215,7 @@ ToastAdd:boolean;
   URLConstructor(idJeu){
     var URLapi="https://api.rawg.io/api";
     var selector="/games";
-    var parameter="/"+41494 ;
+    var parameter="/"+idJeu ;
     //41494 
     //22509 minecraft
     var URLGenerated=(URLapi+selector+parameter);
@@ -232,8 +247,12 @@ ToastAdd:boolean;
         $("#toastAdd").toast('show');
     });
       console.log("le retour n'est pas vide, where's my toast")
-    }
-      
+    }   
   }
+  // ngOnDestroy() {
+  //   if (this.mySubscription) {
+  //     this.mySubscription.unsubscribe();
+  //   }
+  // }
 
 }
