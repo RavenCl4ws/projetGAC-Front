@@ -44,6 +44,7 @@ retourAjoutJeu="avant reponse java";
 retourAjoutNote="avant reponse java";
 ToastNote:boolean;
 ToastAdd:boolean;
+arrayJeuxAffiche=[];
   constructor( 
               private http: HttpClient, 
               private router: Router,
@@ -54,7 +55,7 @@ ToastAdd:boolean;
 
   ngOnInit(): void {
     var that=this;
-    var randomId=this.RandomIdGenerator(350000);
+    // var randomId=this.RandomIdGenerator(350000);
     if(localStorage.getItem('isLoggedIn')=='true'){
       this.connecte=true;
     }else{this.connecte=false};
@@ -159,9 +160,23 @@ ToastAdd:boolean;
         let plateforme={nomPlateforme:element.platform.name,logoPlateforme:logoPlateforme}
         that.myArrLogosPlateformes.push(plateforme);
       });
+      var nomJeuSansEspace=that.nomJeu.split(' ').join('-')
+ //JEUX SUGGERES
+      $.get(that.URLConstructorSugg(nomJeuSansEspace), function (data) {
+				console.log(data);
+				let arrayJeuxSuggRecu = data.results;
+				console.log(arrayJeuxSuggRecu);
+				arrayJeuxSuggRecu.forEach(element => {
+					console.log("l'id du jeu:"+element.id)
+					let jeuxSugg = {idJeuDisplayed:element.id, nomJeu: element.name, description: element.short_description, plateformes: element.parent_platforms, image: element.background_image };
+					that.arrayJeuxAffiche.push(jeuxSugg);
+					console.log(that.arrayJeuxAffiche);
+				});
+			})
 
       });  
-    
+
+      
     
     
   }
@@ -221,11 +236,20 @@ ToastAdd:boolean;
     // console.log(URLGenerated);
     return (URLGenerated)
   };
-  RandomIdGenerator(max){
-    var randomInt=(Math.floor(Math.random() * Math.floor(max)));
-    console.log("log random int: "+randomInt)
-    return randomInt;
-  }
+  URLConstructorSugg(nomJeuProfil) {
+
+		// this.nomJeuProfil = this.nomJeu;                                 // a récuperer (GENRES) !
+		var URLapi = "https://api.rawg.io/api";
+		var selector = "/games";
+		var parameter = "/" + nomJeuProfil + "/suggested";
+		var URLGenerated = (URLapi + selector + parameter);
+		return (URLGenerated)
+	};
+  // RandomIdGenerator(max){
+  //   var randomInt=(Math.floor(Math.random() * Math.floor(max)));
+  //   console.log("log random int: "+randomInt)
+  //   return randomInt;
+  // }
   displayToastNote(){
     if(this.retourAjoutNote==""){
      this.ToastNote=false;
