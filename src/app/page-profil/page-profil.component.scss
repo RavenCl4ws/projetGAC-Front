@@ -1,0 +1,25 @@
+.mail,
+.pseudo,
+.nom,
+.prenom,
+.numeroTel,
+.pays,
+.dateNaissance,
+ul {
+    border: solid grey 1px;
+    border-radius:10px;
+    
+}
+
+.mail,
+.pseudo,
+.nom,
+.prenom,
+.numeroTel,
+.pays,
+.dateNaissance
+{
+    margin-bottom:5px;
+    margin-top:5px;
+    padding:5px;
+}
