@@ -1,32 +1,32 @@
 <div class="container"> 
     <div class="infoConnexion">
         <div class="mail">
-            mail : {{mailUser}}
+            Mail : {{mailUser}}
         </div>
         <div class="pseudo">
-           pseudo : {{pseudo}}
+           Pseudo : {{pseudo}}
         </div>
     </div>   
     <div class="infoPerso">
         <div class="nom">
-           nom: {{nomUser}}
+           Nom : {{nomUser}}
         </div>
         <div class="prenom">
-            prenom : {{prenomUser}}
+            Prénom : {{prenomUser}}
         </div>
         <div class="numeroTel">
-            numero de tel :{{numeroDeTel}}
+            Numéro de Téléphone : {{numeroDeTel}}
         </div>
         <div class="pays">
-            pays : {{pays}}
+            Pays : {{pays}}
         </div>
        <div class="dateNaissance">
-           DDN : {{dateDeNaissance}}
+           Date de Naissance : {{dateDeNaissance}}
        </div>
         
     </div>    
     <ul class="maListe" *ngFor="let element of listeJeuxPossedes">
-        <li>jeu :{{element.nomJeu}}</li>
+        <li>jeu : {{element.nomJeu}}</li>
     </ul>         
         <a href="javascript:void(0);" (click)="logout()">Logout</a>    
 </div>   

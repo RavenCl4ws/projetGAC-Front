@@ -9,9 +9,8 @@
 
 <!-- Copie de la page login -->
 <div class="container" *ngIf="connecte; else elseBlockConnecte">
-  {{pseudo}}
-  <div>
-    <br>
+  Bienvenue {{pseudo}}
+  <div class="logout">
     <a href="javascript:void(0);" (click)="logout()">Logout</a> </div>
 </div>
 <ng-template #elseBlockConnecte>
