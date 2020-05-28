@@ -217,6 +217,7 @@ ToastAdd:boolean;
      this.ToastNote=false;
     }
     else{this.ToastNote=true;
+      $("#toastNote").toast('show');
       }
   }
   displayToastAdd(){
