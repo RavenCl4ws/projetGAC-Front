@@ -18,6 +18,7 @@ const routes: Routes = [
   {path:'profil', component: PageProfilComponent,canActivate : [AuthGuard]},
   {path:'authentification', component: AuthentificationComponent},
   {path:'classement', component: PageClassementComponent},
+  {path:'page-article-jeu', component: PageArticleJeuComponent},
 ];
 
 @NgModule({

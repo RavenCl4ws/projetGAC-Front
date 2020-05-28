@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 // import * as $ from 'jquery';
 declare var $ : any;
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';  
+import { Router, ActivatedRoute  } from '@angular/router';  
 
-import { templateJitUrl } from '@angular/compiler';
+// import { templateJitUrl } from '@angular/compiler';
 
 @Component({
   selector: 'app-page-article-jeu',
@@ -14,13 +14,13 @@ import { templateJitUrl } from '@angular/compiler';
 })
 
 export class PageArticleJeuComponent implements OnInit {
-  idJeuInput=12;
-  @Input() idJeu:string;
-
+ 
+  
   connecte:boolean=false;
   show=false;
+  idJeuRequete;
 
-  mySubscription:any;
+  // mySubscription:any;
   nomJeu: String; // à envoyer au servlet
   genrePrincipal; // à envoyer au servlet
   notePerso; // à envoyer au servlet
@@ -47,17 +47,9 @@ ToastAdd:boolean;
   constructor( 
               private http: HttpClient, 
               private router: Router,
+              // private route: ActivatedRoute
               ){
-            //     this.router.routeReuseStrategy.shouldReuseRoute = function () {
-            //     return false;
-            //   };
-              
-            //   this.mySubscription = this.router.events.subscribe((event) => {
-            //     if (event instanceof this.onClickRate) {
-            //       // Trick the Router into believing it's last link wasn't previously loaded
-            //       this.router.navigated = false;
-            //     }
-            //   });
+            
              }
 
   ngOnInit(): void {
@@ -67,7 +59,12 @@ ToastAdd:boolean;
       this.connecte=true;
     }else{this.connecte=false};
 
-    $.get(this.URLConstructor(this.idJeu),function(data){
+
+    this.idJeuRequete=localStorage.getItem('idJeu')
+
+    
+
+      $.get(this.URLConstructor(this.idJeuRequete),function(data){
       console.log(data);
 
       that.nomJeu=data.name;
@@ -163,7 +160,9 @@ ToastAdd:boolean;
         that.myArrLogosPlateformes.push(plateforme);
       });
 
-    });  
+      });  
+    
+    
     
   }
   onInitNoteMoyenne(){

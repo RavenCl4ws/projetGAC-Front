@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 import * as $ from 'jquery';
 import { EventEmitter } from 'protractor';
 import { templateJitUrl } from '@angular/compiler';
+import { Router } from '@angular/router';  
 
 @Component({
 	selector: 'app-carousel',
@@ -32,13 +33,15 @@ export class CarouselComponent implements OnInit {
 	classements;
 	stores;
 	plateformes;
-
+	
 	// tableau jeux
 
-	arrayJeuxSugg = [];
-	arrayJeuxTrend = [];
+	arrayJeuxAffiche = [];
+	// arrayJeuxTrend = [];
 
-	constructor() { }
+	constructor(
+				private router: Router,
+				) { }
 
 	ngOnInit(): void {
 		var that = this;
@@ -56,9 +59,10 @@ console.log(this.status);
 				let arrayJeuxSuggRecu = data.results;
 				console.log(arrayJeuxSuggRecu);
 				arrayJeuxSuggRecu.forEach(element => {
-					let jeuxSugg = { nomJeu: element.name, description: element.short_description, plateformes: element.parent_platforms, image: element.background_image };
-					that.arrayJeuxSugg.push(jeuxSugg);
-					console.log(that.arrayJeuxSugg);
+					console.log("l'id du jeu:"+element.id)
+					let jeuxSugg = {idJeuDisplayed:element.id, nomJeu: element.name, description: element.short_description, plateformes: element.parent_platforms, image: element.background_image };
+					that.arrayJeuxAffiche.push(jeuxSugg);
+					console.log(that.arrayJeuxAffiche);
 				});
 			})
 		}
@@ -72,9 +76,10 @@ console.log(this.status);
 				}
 				console.log(arrayJeuxTrendRecu);
 				arrayJeuxTrendRecu.forEach(element => {
-					let jeuxTrend = { nomJeu: element.name, dateSortie: element.released, plateformes: element.parent_platforms, image: element.background_image };
-					that.arrayJeuxTrend.push(jeuxTrend);
-					console.log(that.arrayJeuxTrend);
+					console.log("l'id du jeu:"+element.id)
+					let jeuxTrend = {idJeuDisplayed:element.id, nomJeu: element.name, dateSortie: element.released, plateformes: element.parent_platforms, image: element.background_image };
+					that.arrayJeuxAffiche.push(jeuxTrend);
+					console.log(that.arrayJeuxAffiche);
 				});
 			})
 		}
@@ -101,7 +106,11 @@ console.log(this.status);
 		return (URLGenerated)
 	}
 
-
+	goToPage(idJeuDisplayed) {
+		console.log("l'id recu dans gotoPAge:"+idJeuDisplayed)
+		localStorage.setItem('idJeu',idJeuDisplayed),
+		this.router.navigate(['/page-article-jeu'], { queryParams: { idJeu: idJeuDisplayed } });
+	  }
 
 	RandomIdGenerator(max) {
 		var randomInt = (Math.floor(Math.random() * Math.floor(max)));
