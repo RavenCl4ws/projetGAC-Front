@@ -29,7 +29,7 @@ export class PageProfilComponent implements OnInit {
   }
   recupInfoProfil(){
     var requeteInfoProfil={userId:localStorage.getItem('idUser')}
-    this.http.post("http://localhost:8080/projetGAC/ProfilUtilisateur", requeteInfoProfil, { responseType: 'json' }).toPromise().then((data) => {
+    this.http.post("http://localhost:8080/projetGAC/ProfilUtilisateur", requeteInfoProfil, { responseType: 'json' }).toPromise().then((data:any) => {
       console.log("datarecuProfil: "+data)
     this.nomUser=data.nom;
     this.prenomUser=data.prenom;
