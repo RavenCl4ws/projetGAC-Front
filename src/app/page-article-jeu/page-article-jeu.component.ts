@@ -156,7 +156,7 @@ ToastAdd:boolean;
   onInitNoteMoyenne(){
     
     var requeteNoteMoyenne={nomJeu:this.nomJeu}
-    this.http.post("http://localhost:8080/projetGAC/CalculNoteMoyenneJeu", requeteNoteMoyenne, { responseType: 'json' }).toPromise().then((data) => {
+    this.http.post("http://localhost:8080/projetGAC/CalculNoteMoyenneJeu", requeteNoteMoyenne, { responseType: 'json' }).toPromise().then((data:any) => {
       var reponse = data;
       this.noteMoyenne=reponse.noteMoyenne;
       // console.log("la reponse oninitNoteMoyenne:" + reponse);
@@ -164,7 +164,7 @@ ToastAdd:boolean;
   }
   onInitNotePerso(){
     var requeteNotePerso={nomJeu:this.nomJeu,userId:localStorage.getItem('idUser')}
-    this.http.post("http://localhost:8080/projetGAC/LectureNoteUtilisateur", requeteNotePerso, { responseType: 'json' }).toPromise().then((data) => {
+    this.http.post("http://localhost:8080/projetGAC/LectureNoteUtilisateur", requeteNotePerso, { responseType: 'json' }).toPromise().then((data:any) => {
       var reponse = data;
       this.notePerso=reponse.note;
       // console.log("la reponse onInitNotePerso:" + reponse);
