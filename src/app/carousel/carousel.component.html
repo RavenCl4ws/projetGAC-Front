@@ -6,7 +6,7 @@
 
     <!-- AFICHAGE CONNECTE -->
     
-    <div class="carousel-item" *ngFor="let jeuSugg of arrayJeuxSugg;let isFirst = first" [ngClass]="{active:isFirst}">
+    <div class="carousel-item" style="text-align:center" *ngFor="let jeuSugg of arrayJeuxSugg;let isFirst = first" [ngClass]="{active:isFirst}">
       <h2>Jeux recommandés</h2>
       <div class="card">
         <div class="imageCard">
@@ -28,7 +28,7 @@
     <!-- AFICHAGE NON CONNECTE -->
 
    
-    <div class="carousel-item" *ngFor="let jeuTrend of arrayJeuxTrend;let isFirst = first" [ngClass]="{active:isFirst}">
+    <div class="carousel-item" style="text-align:center" *ngFor="let jeuTrend of arrayJeuxTrend;let isFirst = first" [ngClass]="{active:isFirst}">
       <h2>Jeux du moment</h2>
       <div class="card">
         <div class="imageCard">

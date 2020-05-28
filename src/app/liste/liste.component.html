@@ -1,23 +1,27 @@
 <div class="row">
-    <div class="col-12">
-      <ul class="list-unstyled">
-        <li class="media" *ngFor="let jeuRating of arrayJeuxRating">
-          <img src="{{jeuRating.image}}" width="40%" alt="{{jeuRating.nomJeu}}">
-          <div class="media-body">
-            <h5 class="mt-0 mb-1 ">{{jeuRating.nomJeu}}</h5>
-            <h6>Note Rawg : {{jeuRating.note}}</h6>
-            <em class="card-text">Date de Sortie : {{jeuRating.dateSortie}}</em><br>
-            <button id="boutonAjouter" type="button" class="btn btn-primary" href="#" role="button">Ajouter a ma liste</button>
-          </div>
-        </li>
-      </ul>
-    </div>
+  <div class="col-12">
+    <ul class="list-unstyled">
+      <li class="media" style="margin-bottom: 10px; margin-top: 10px;" *ngFor="let jeuRating of arrayJeuxRating">
+          <img src="{{jeuRating.image}}" style="width: 120px;" alt="{{jeuRating.nomJeu}}">
+        <div class="media-body">
+          <h5 class="mt-0 mb-1 ">{{jeuRating.nomJeu}}</h5>
+          <h6>Note Rawg : {{jeuRating.note}}</h6>
+          <em class="card-text">Date de Sortie : {{jeuRating.dateSortie}}</em><br>
+          <button id="boutonAjouter" type="button" class="btn btn-primary" href="#" role="button">Ajouter a ma
+            liste</button>
+        </div>
+      </li>
+    </ul>
   </div>
+</div>
 
-  
 
 
-    <!-- <div class="list-group" id="list-tab" role="tablist">
+
+
+<!-- Liste de CARD (au cas ou) -->
+
+<!-- <div class="list-group" id="list-tab" role="tablist">
       <div class="card" *ngFor="let jeuRating of arrayJeuxRating">
           <div class="imageCard">
             <img src="{{jeuRating.image}}" class="d-block w-100" alt="{{jeuRating.nomJeu}}" width="100%">
