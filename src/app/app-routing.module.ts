@@ -8,12 +8,13 @@ import { PageProfilComponent } from './page-profil/page-profil.component';
 import { AuthentificationComponent } from './authentification/authentification.component';
 import { AuthGuard } from './guards/auth.guard';
 import { PageClassementComponent } from './page-classement/page-classement.component';
+import { DecouvrirComponent } from './decouvrir/decouvrir.component';
 
 const routes: Routes = [
   {path:'test', component: PageTestComponent},
   {path:'accueil', component: AccueilComponent},
   {path:'inscription', component: PageInscriptionComponent},
-  {path:'decouvrir', component: PageArticleJeuComponent},
+  {path:'decouvrir', component:  DecouvrirComponent},
   {path:'profil', component: PageProfilComponent,canActivate : [AuthGuard]},
   {path:'authentification', component: AuthentificationComponent},
   {path:'classement', component: PageClassementComponent},
