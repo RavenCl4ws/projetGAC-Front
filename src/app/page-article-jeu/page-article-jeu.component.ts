@@ -1,24 +1,26 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 // import * as $ from 'jquery';
 declare var $ : any;
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';  
+import { Router, ActivatedRoute  } from '@angular/router';  
 
+// import { templateJitUrl } from '@angular/compiler';
 
 @Component({
   selector: 'app-page-article-jeu',
   templateUrl: './page-article-jeu.component.html',
-  styleUrls: ['./page-article-jeu.component.scss']
+  styleUrls: ['./page-article-jeu.component.scss'],
+  template:'idJeu:{{randomId}}'
 })
 
 export class PageArticleJeuComponent implements OnInit {
-  idJeuInput=12;
-  @Input() idJeu;
-
+ 
+  
   connecte:boolean=false;
   show=false;
+  idJeuRequete;
 
-
+  // mySubscription:any;
   nomJeu: String; // à envoyer au servlet
   genrePrincipal; // à envoyer au servlet
   notePerso; // à envoyer au servlet
@@ -42,19 +44,28 @@ retourAjoutJeu="avant reponse java";
 retourAjoutNote="avant reponse java";
 ToastNote:boolean;
 ToastAdd:boolean;
+arrayJeuxAffiche=[];
   constructor( 
               private http: HttpClient, 
               private router: Router,
-              ){ }
+              // private route: ActivatedRoute
+              ){
+            
+             }
 
   ngOnInit(): void {
     var that=this;
-    var randomId=this.RandomIdGenerator(350000);
+    // var randomId=this.RandomIdGenerator(350000);
     if(localStorage.getItem('isLoggedIn')=='true'){
       this.connecte=true;
     }else{this.connecte=false};
 
-    $.get(this.URLConstructor(randomId),function(data){
+
+    this.idJeuRequete=localStorage.getItem('idJeu')
+
+    
+
+      $.get(this.URLConstructor(this.idJeuRequete),function(data){
       console.log(data);
 
       that.nomJeu=data.name;
@@ -149,8 +160,24 @@ ToastAdd:boolean;
         let plateforme={nomPlateforme:element.platform.name,logoPlateforme:logoPlateforme}
         that.myArrLogosPlateformes.push(plateforme);
       });
+      var nomJeuSansEspace=that.nomJeu.split(' ').join('-')
+ //JEUX SUGGERES
+      $.get(that.URLConstructorSugg(nomJeuSansEspace), function (data) {
+				console.log(data);
+				let arrayJeuxSuggRecu = data.results;
+				console.log(arrayJeuxSuggRecu);
+				arrayJeuxSuggRecu.forEach(element => {
+					console.log("l'id du jeu:"+element.id)
+					let jeuxSugg = {idJeuDisplayed:element.id, nomJeu: element.name, description: element.short_description, plateformes: element.parent_platforms, image: element.background_image };
+					that.arrayJeuxAffiche.push(jeuxSugg);
+					console.log(that.arrayJeuxAffiche);
+				});
+			})
 
-    });  
+      });  
+
+      
+    
     
   }
   onInitNoteMoyenne(){
@@ -177,6 +204,7 @@ ToastAdd:boolean;
        this.retourAjoutJeu = data;
       console.log("la reponse:" + this.retourAjoutJeu);
       this.displayToastAdd();
+      location.reload();
   });
   
   }
@@ -190,6 +218,7 @@ ToastAdd:boolean;
        this.retourAjoutNote = data;
       console.log("la reponse:" + this.retourAjoutNote);
       this.displayToastNote();
+      location.reload();
   });
     }
   // this.afficheNote();
@@ -200,18 +229,27 @@ ToastAdd:boolean;
   URLConstructor(idJeu){
     var URLapi="https://api.rawg.io/api";
     var selector="/games";
-    var parameter="/"+41494 ;
+    var parameter="/"+idJeu ;
     //41494 
     //22509 minecraft
     var URLGenerated=(URLapi+selector+parameter);
     // console.log(URLGenerated);
     return (URLGenerated)
   };
-  RandomIdGenerator(max){
-    var randomInt=(Math.floor(Math.random() * Math.floor(max)));
-    console.log("log random int: "+randomInt)
-    return randomInt;
-  }
+  URLConstructorSugg(nomJeuProfil) {
+
+		// this.nomJeuProfil = this.nomJeu;                                 // a récuperer (GENRES) !
+		var URLapi = "https://api.rawg.io/api";
+		var selector = "/games";
+		var parameter = "/" + nomJeuProfil + "/suggested";
+		var URLGenerated = (URLapi + selector + parameter);
+		return (URLGenerated)
+	};
+  // RandomIdGenerator(max){
+  //   var randomInt=(Math.floor(Math.random() * Math.floor(max)));
+  //   console.log("log random int: "+randomInt)
+  //   return randomInt;
+  // }
   displayToastNote(){
     if(this.retourAjoutNote==""){
      this.ToastNote=false;
@@ -232,8 +270,12 @@ ToastAdd:boolean;
         $("#toastAdd").toast('show');
     });
       console.log("le retour n'est pas vide, where's my toast")
-    }
-      
+    }   
   }
+  // ngOnDestroy() {
+  //   if (this.mySubscription) {
+  //     this.mySubscription.unsubscribe();
+  //   }
+  // }
 
 }
