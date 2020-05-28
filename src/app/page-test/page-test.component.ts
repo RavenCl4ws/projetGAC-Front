@@ -18,7 +18,7 @@ export class PageTestComponent implements OnInit {
   registerForm: FormGroup;
 
   postData={test:"myContent",age:8};
-  url="http://localhost:8080/projetGAC/TestBase";
+  url="http://localhost:8080/projetGAC/InscriptionUtilisateur";
   Varjson="marche pas";
   vartest= "valeur1";
 

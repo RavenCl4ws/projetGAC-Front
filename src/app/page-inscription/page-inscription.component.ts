@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class PageInscriptionComponent implements OnInit {
   registerForm: FormGroup;
-  url="http://localhost:8080/projetGAC/TestBase";
+  url="http://localhost:8080/projetGAC/InscriptionUtilisateur";
   userAEnvoyer=new User("","","","","","","","")
   submited=false;
   reponse;
