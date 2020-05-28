@@ -1,20 +1,35 @@
 <div class="row">
     <div class="col-12">
-      <div class="list-group" id="list-tab" role="tablist">
-        <div class="card" *ngFor="let jeuRating of arrayJeuxRating">
-            <div class="imageCard">
-              <img src="{{jeuRating.image}}" class="d-block w-100" alt="{{jeuRating.nomJeu}}" width="100%">
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">{{jeuRating.nomJeu}}</h5>
-              <h6>Note Rawg : {{jeuRating.note}}</h6>
-              <em class="card-text">Date de Sortie : {{jeuRating.dateSortie}}</em>
-            </div>
-            <div class="card-footer">
-              <button id="boutonAjouter" type="button" class="btn btn-primary" href="#" role="button">Ajouter
-                 {{jeuRating.nomJeu}} a ma liste</button>   <!--  A quelle liste ?  -->
-            </div>
+      <ul class="list-unstyled">
+        <li class="media" *ngFor="let jeuRating of arrayJeuxRating">
+          <img src="{{jeuRating.image}}" width="40%" alt="{{jeuRating.nomJeu}}">
+          <div class="media-body">
+            <h5 class="mt-0 mb-1 ">{{jeuRating.nomJeu}}</h5>
+            <h6>Note Rawg : {{jeuRating.note}}</h6>
+            <em class="card-text">Date de Sortie : {{jeuRating.dateSortie}}</em><br>
+            <button id="boutonAjouter" type="button" class="btn btn-primary" href="#" role="button">Ajouter a ma liste</button>
           </div>
-      </div>
+        </li>
+      </ul>
     </div>
   </div>
+
+  
+
+
+    <!-- <div class="list-group" id="list-tab" role="tablist">
+      <div class="card" *ngFor="let jeuRating of arrayJeuxRating">
+          <div class="imageCard">
+            <img src="{{jeuRating.image}}" class="d-block w-100" alt="{{jeuRating.nomJeu}}" width="100%">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{jeuRating.nomJeu}}</h5>
+            <h6>Note Rawg : {{jeuRating.note}}</h6>
+            <em class="card-text">Date de Sortie : {{jeuRating.dateSortie}}</em>
+          </div>
+          <div class="card-footer">
+            <button id="boutonAjouter" type="button" class="btn btn-primary" href="#" role="button">Ajouter
+               {{jeuRating.nomJeu}} a ma liste</button>     A quelle liste ? 
+          </div>
+        </div>
+    </div> -->

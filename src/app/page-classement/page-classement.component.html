@@ -1,0 +1,26 @@
+
+  <div style="text-align:center">
+    <h4>
+      Classement Rawg
+    </h4>
+  
+    <table class="table">
+     
+      <tbody>
+        <tr *ngFor="let jeuRating of arrayJeuxRating | paginate: config">
+            <img src="{{jeuRating.image}}" width="40%" alt="{{jeuRating.nomJeu}}">
+            <div style="margin-bottom: 20px;" class="media-body">
+              <h5 class="mt-0 mb-1 ">{{jeuRating.nomJeu}}</h5>
+              <h6>Note Rawg : {{jeuRating.note}}</h6>
+              <em class="card-text">Date de Sortie : {{jeuRating.dateSortie}}</em><br>
+              <button id="boutonAjouter" type="button" class="btn btn-primary" href="#" role="button">Ajouter a ma liste</button>
+            </div>
+        </tr>
+      </tbody>
+    </table>
+  
+    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+  
+  </div>
+
+  
