@@ -38,6 +38,7 @@ export class PageArticleJeuComponent implements OnInit {
   dateSortie;
   noteMeta;
   myClip;
+  pasVideo;
   // trailer;
   // createurs={};
 retourAjoutJeu="avant reponse java";
@@ -82,7 +83,13 @@ arrayJeuxAffiche=[];
       that.noteMeta=data.metacritic;
 
 //CLIP
+      if (data.clip==null){
+        that.pasVideo=true;
+      }
+      else{
       that.myClip=data.clip.clip;
+      console.log("COUCOU CLIP:"+that.myClip);}
+      // if(that.myClip)
       // console.log(that.myClip)
 
 //GENRE
@@ -272,10 +279,10 @@ arrayJeuxAffiche=[];
       console.log("le retour n'est pas vide, where's my toast")
     }   
   }
-  // ngOnDestroy() {
-  //   if (this.mySubscription) {
-  //     this.mySubscription.unsubscribe();
-  //   }
-  // }
+  goToPage(idJeuDisplayed) {
+		console.log("l'id recu dans gotoPAge:"+idJeuDisplayed)
+		localStorage.setItem('idJeu',idJeuDisplayed),
+		location.reload();
+	  }
 
 }

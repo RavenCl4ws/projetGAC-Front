@@ -29,7 +29,8 @@
 
    
     <div class="carousel-item" style="text-align:center" *ngFor="let jeuTrend of arrayJeuxAffiche;let isFirst = first" [ngClass]="{active:isFirst}">
-      <h2>Jeux du moment</h2>
+      <h2 *ngIf="connecte; else elseBlockTitreCarou">vu que vous avez joué à {{nomJeuProfil}}, nous vous conseillons:</h2>
+      <ng-template #elseBlockTitreCarou><h2>Jeux du moment</h2></ng-template>
       <div class="card">
         <div class="imageCard">
           <img src="{{jeuTrend.image}}" class="d-block w-100" alt="{{jeuTrend.nomJeu}}">
@@ -40,8 +41,7 @@
         </div>
         <div class="card-footer">
           <button id="boutonInfo" type="button" class="btn btn-dark" href="#" role="button" (click)="goToPage(jeuTrend.idJeuDisplayed)">Plus d'info...</button>
-          <button id="boutonAjouter" type="button" class="btn btn-primary" href="#" role="button">Ajouter
-            {{jeuTrend.nomJeu}} a ma liste</button> <!--  A quelle liste ?  -->
+      
         </div>
       </div>
     </div>

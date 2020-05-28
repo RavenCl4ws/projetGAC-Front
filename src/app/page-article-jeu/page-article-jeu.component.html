@@ -62,8 +62,9 @@
             </div>
           </div>
         </div>
-        <div class="col2content trailer col-md-5 box">
-          <iframe width="100%" height="100%" [src]="myClip | safe" allowfullscreen></iframe>
+        <div class="col2content trailer col-md-5 box" >
+          <iframe width="100%" height="100%"  *ngIf="!pasVideo; else elseBlockiframe" [src]="myClip | safe" allowfullscreen></iframe>
+          <ng-template #elseBlockiframe>Aucune video disponible pour ce jeu</ng-template>
         </div>
         <div class="description col-md-10 offset-md-1 box justify-content-center">
           <h3>Description</h3>
@@ -108,8 +109,7 @@
                   <div class="card-footer">
                     <button id="boutonInfo" type="button" class="btn btn-dark" href="#" role="button"
                       (click)="goToPage(jeuSugg.idJeuDisplayed)">Plus d'info...</button>
-                    <button id="boutonAjouter" type="button" class="btn btn-primary" href="#" role="button">Ajouter
-                      {{jeuSugg.nomJeu}} a ma liste</button> <!--  A quelle liste ?  -->
+
                   </div>
                 </div>
               </div>

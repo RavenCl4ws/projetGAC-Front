@@ -39,6 +39,7 @@ export class CarouselComponent implements OnInit {
 	arrayJeuxAffiche = [];
 	// arrayJeuxTrend = [];
 
+	connecte;
 	constructor(
 				private router: Router,
 				) { }
@@ -47,14 +48,18 @@ export class CarouselComponent implements OnInit {
 		var that = this;
 		var randomId = this.RandomIdGenerator(350000);
 		this.dates = 2020;
-		
-		
+		this.nomJeuProfil=localStorage.getItem('nomJeuListe');
+		var nomJeuSansEspace=that.nomJeuProfil.split(' ').join('-')
+		if(localStorage.getItem('isLoggedIn')=='true'){
+			this.connecte=true;
+		  }else{this.connecte=false};
 		// REQUETES
-console.log(this.status);
+		//console.log(this.status);
 
 		if (this.page == "accueil" && this.status == "connecte") {
 			console.log("début du if");
-			$.get(this.URLConstructorSugg(this.nomJeuProfil), function (data) {
+			
+			$.get(this.URLConstructorSugg(nomJeuSansEspace), function (data) {
 				console.log(data);
 				let arrayJeuxSuggRecu = data.results;
 				console.log(arrayJeuxSuggRecu);
@@ -89,10 +94,10 @@ console.log(this.status);
 
 	URLConstructorSugg(nomJeuProfil) {
 
-		this.nomJeuProfil = "Minecraft";                                 // a récuperer (GENRES) !
+		// this.nomJeuProfil = "Minecraft";                                 // a récuperer (GENRES) !
 		var URLapi = "https://api.rawg.io/api";
 		var selector = "/games";
-		var parameter = "/" + this.nomJeuProfil + "/suggested";
+		var parameter = "/" + nomJeuProfil + "/suggested";
 		var URLGenerated = (URLapi + selector + parameter);
 		return (URLGenerated)
 	}
