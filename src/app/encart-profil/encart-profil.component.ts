@@ -23,7 +23,8 @@ export class EncartProfilComponent implements OnInit {
   coupleUserMdp;
   reponse;
   userConnecte: User;
-
+  connecte;
+  pseudo;
   constructor(
     private http: HttpClient,
     private formBuilder: FormBuilder,
@@ -34,12 +35,17 @@ export class EncartProfilComponent implements OnInit {
 
 
   ngOnInit(): void {
-  this.loginForm = this.formBuilder.group({
-    userid: ['', Validators.required],
-    password: ['', Validators.required]
-  });
-    this.returnUrl = '/profil';
-    this.authService.logout();
+    if (localStorage.getItem('isLoggedIn') == 'true') {
+      this.connecte = true;
+      this.pseudo = localStorage.getItem('pseudo');
+      console.log(this.pseudo);
+    } else { this.connecte = false };
+    this.loginForm = this.formBuilder.group({
+      userid: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+    // this.returnUrl = '/profil';
+    // this.authService.logout();
   }
 
   // convenience getter for easy access to form fields  
@@ -57,7 +63,7 @@ export class EncartProfilComponent implements OnInit {
       this.http.post(this.url, this.coupleUserMdp, { responseType: 'json' }).toPromise().then((data) => {
 
         this.reponse = data;
-        console.log("this.reponse.id:"+this.reponse.id);
+        console.log("this.reponse.id:" + this.reponse.id);
         console.log("la reponse:" + this.reponse);
         if (this.reponse == "texteErreur") {
           this.router.navigate(['/authentification']);
@@ -65,23 +71,29 @@ export class EncartProfilComponent implements OnInit {
 
         }
         else {
-         
+
           console.log("Login successful");
-          console.log("this.reponse.id:"+this.reponse.id);
+          console.log("this.reponse.id:" + this.reponse.id);
           //this.authService.authLogin(this.model);  
-         
+
           localStorage.setItem('isLoggedIn', "true");
           //localStorage.setItem('token', this.f.userid.value)
           localStorage.setItem('pseudo', this.reponse.pseudo);
-          localStorage.setItem('idUser',this.reponse.id);
-
-          this.router.navigate([this.returnUrl]);
+          localStorage.setItem('idUser', this.reponse.id);
+          location.reload();
+          // this.router.navigate([this.returnUrl]);
         }
 
 
       })
 
     }
+  }
+  logout() {
+    console.log('logout');
+    this.authService.logout();
+    this.router.navigate(['/authentification']);
+    location.reload();
   }
 }
 
