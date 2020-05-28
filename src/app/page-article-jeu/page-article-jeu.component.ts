@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import * as $ from 'jquery';
+import { Component, OnInit, Input } from '@angular/core';
+// import * as $ from 'jquery';
+declare var $ : any;
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';  
 
@@ -11,6 +12,9 @@ import { Router } from '@angular/router';
 })
 
 export class PageArticleJeuComponent implements OnInit {
+  idJeuInput=12;
+  @Input() idJeu;
+
   connecte:boolean=false;
   show=false;
 
@@ -34,7 +38,10 @@ export class PageArticleJeuComponent implements OnInit {
   myClip;
   // trailer;
   // createurs={};
-
+retourAjoutJeu="avant reponse java";
+retourAjoutNote="avant reponse java";
+ToastNote:boolean;
+ToastAdd:boolean;
   constructor( 
               private http: HttpClient, 
               private router: Router,
@@ -46,13 +53,14 @@ export class PageArticleJeuComponent implements OnInit {
     if(localStorage.getItem('isLoggedIn')=='true'){
       this.connecte=true;
     }else{this.connecte=false};
-    
-    // console.log("log on init randomId : "+randomId);
-    // console.log(this.URLConstructor(randomId));
+
     $.get(this.URLConstructor(randomId),function(data){
       console.log(data);
 
       that.nomJeu=data.name;
+      that.onInitNoteMoyenne();
+      that.onInitNotePerso();
+
       that.description=data.description_raw;
       that.image=data.background_image;
      
@@ -64,7 +72,7 @@ export class PageArticleJeuComponent implements OnInit {
 
 //CLIP
       that.myClip=data.clip.clip;
-      console.log(that.myClip)
+      // console.log(that.myClip)
 
 //GENRE
       let arrayGenreRecu=data.genres;
@@ -143,13 +151,32 @@ export class PageArticleJeuComponent implements OnInit {
       });
 
     });  
+    
+  }
+  onInitNoteMoyenne(){
+    
+    var requeteNoteMoyenne={nomJeu:this.nomJeu}
+    this.http.post("http://localhost:8080/projetGAC/CalculNoteMoyenneJeu", requeteNoteMoyenne, { responseType: 'json' }).toPromise().then((data:any) => {
+      var reponse = data;
+      this.noteMoyenne=reponse.noteMoyenne;
+      // console.log("la reponse oninitNoteMoyenne:" + reponse);
+  });
+  }
+  onInitNotePerso(){
+    var requeteNotePerso={nomJeu:this.nomJeu,userId:localStorage.getItem('idUser')}
+    this.http.post("http://localhost:8080/projetGAC/LectureNoteUtilisateur", requeteNotePerso, { responseType: 'json' }).toPromise().then((data:any) => {
+      var reponse = data;
+      this.notePerso=reponse.note;
+      // console.log("la reponse onInitNotePerso:" + reponse);
+  });
   }
   onClickAdd(){
     var infoJeu={userId:localStorage.getItem('idUser'),nomJeu:this.nomJeu,genre:this.genrePrincipal}
     console.log(infoJeu)
     this.http.post("http://localhost:8080/projetGAC/AjoutJeuListeJeuxPossedes", infoJeu, { responseType: 'text' }).toPromise().then((data: string) => {
-      var reponse = data;
-      console.log("la reponse:" + reponse);
+       this.retourAjoutJeu = data;
+      console.log("la reponse:" + this.retourAjoutJeu);
+      this.displayToastAdd();
   });
   
   }
@@ -159,21 +186,21 @@ export class PageArticleJeuComponent implements OnInit {
     }else{
     let infoNote={userId:localStorage.getItem('idUser'),nomJeu:this.nomJeu,notePerso:note}
     console.log(infoNote);
-  //   this.http.post("http://localhost:8080/projetGAC/AjoutJeuListeJeuxPossedes", infoNote, { responseType: 'text' }).toPromise().then((data: string) => {
-  //     var reponse = data;
-  //     console.log("la reponse:" + reponse);
-  // });
+    this.http.post("http://localhost:8080/projetGAC/AjoutNoteUtilisateur", infoNote, { responseType: 'text' }).toPromise().then((data: string) => {
+       this.retourAjoutNote = data;
+      console.log("la reponse:" + this.retourAjoutNote);
+      this.displayToastNote();
+  });
     }
   // this.afficheNote();
   }
   // afficheNote(){
 
   // };
-
-  URLConstructor(randomInt){
+  URLConstructor(idJeu){
     var URLapi="https://api.rawg.io/api";
     var selector="/games";
-    var parameter="/"+22509 ;
+    var parameter="/"+41494 ;
     //41494 
     //22509 minecraft
     var URLGenerated=(URLapi+selector+parameter);
@@ -182,8 +209,30 @@ export class PageArticleJeuComponent implements OnInit {
   };
   RandomIdGenerator(max){
     var randomInt=(Math.floor(Math.random() * Math.floor(max)));
-    // console.log("log random int: "+randomInt)
+    console.log("log random int: "+randomInt)
     return randomInt;
+  }
+  displayToastNote(){
+    if(this.retourAjoutNote==""){
+     this.ToastNote=false;
+    }
+    else{this.ToastNote=true;
+      }
+  }
+  displayToastAdd(){
+    console.log("coucou this.displayToastAdd")
+    console.log(this.retourAjoutJeu)
+    if(this.retourAjoutJeu==""){
+     this.ToastAdd=false;
+     console.log("le retour est vide")
+    }
+    else{this.ToastAdd=true;
+      $(document).ready(function(){
+        $("#toastAdd").toast('show');
+    });
+      console.log("le retour n'est pas vide, where's my toast")
+    }
+      
   }
 
 }

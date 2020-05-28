@@ -1,6 +1,32 @@
-<div class="container">    
-    <div class="col-md-6 col-md-offset-3 loginBox">    
-        Welcome,  {{id}}    
-        <a href="javascript:void(0);" (click)="logout()">Logout</a>    
+<div class="container"> 
+    <div class="infoConnexion">
+        <div class="mail">
+            mail : {{mailUser}}
+        </div>
+        <div class="pseudo">
+           pseudo : {{pseudo}}
+        </div>
+    </div>   
+    <div class="infoPerso">
+        <div class="nom">
+           nom: {{nomUser}}
+        </div>
+        <div class="prenom">
+            prenom : {{prenomUser}}
+        </div>
+        <div class="numeroTel">
+            numero de tel :{{numeroDeTel}}
+        </div>
+        <div class="pays">
+            pays : {{pays}}
+        </div>
+       <div class="dateNaissance">
+           DDN : {{dateDeNaissance}}
+       </div>
+        
     </div>    
-  </div>   
+    <ul class="maListe" *ngFor="let element of listeJeuxPossedes">
+        <li>jeu :{{element.nomJeu}}</li>
+    </ul>         
+        <!-- <a href="javascript:void(0);" (click)="logout()">Logout</a>     -->
+</div>   
