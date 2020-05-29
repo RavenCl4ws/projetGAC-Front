@@ -58,7 +58,9 @@ export class CarouselComponent implements OnInit {
 
 		if (this.page == "accueil" && this.status == "connecte") {
 			console.log("début du if");
-			
+			console.log("nom jeu sans espace:" +nomJeuSansEspace)
+			console.log("nom jeu sans espace:" +nomJeuSansEspace)
+			if(nomJeuSansEspace!=""){
 			$.get(this.URLConstructorSugg(nomJeuSansEspace), function (data) {
 				console.log(data);
 				let arrayJeuxSuggRecu = data.results;
@@ -70,6 +72,22 @@ export class CarouselComponent implements OnInit {
 					console.log(that.arrayJeuxAffiche);
 				});
 			})
+		}else{
+			console.log("début du else if");
+			$.get(this.URLConstructorTrending(this.dates), function (data) {
+				let arrayJeuxTrendRecu = [];
+				for (var i = 0; i < 5; i++) {
+					arrayJeuxTrendRecu.push(data.results[i]);
+				}
+				console.log(arrayJeuxTrendRecu);
+				arrayJeuxTrendRecu.forEach(element => {
+					console.log("l'id du jeu:"+element.id)
+					let jeuxTrend = {idJeuDisplayed:element.id, nomJeu: element.name, dateSortie: element.released, plateformes: element.parent_platforms, image: element.background_image };
+					that.arrayJeuxAffiche.push(jeuxTrend);
+					console.log(that.arrayJeuxAffiche);
+				});
+			})
+		}
 		}
 
 		else if (this.page == "accueil" && this.status == "") {

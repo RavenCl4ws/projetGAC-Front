@@ -6,6 +6,7 @@ import { HttpClient} from '@angular/common/http';
 import {User} from '../user';
 import { Observable } from 'rxjs';
 
+
 @Component({
   selector: 'app-page-inscription',
   templateUrl: './page-inscription.component.html',
@@ -18,7 +19,7 @@ export class PageInscriptionComponent implements OnInit {
   submited=false;
   reponse;
 
-  constructor(private http:HttpClient){}
+  constructor(private http:HttpClient,private router: Router,){}
 
   ngOnInit(): void {
   }
@@ -29,6 +30,7 @@ export class PageInscriptionComponent implements OnInit {
        this.reponse=data;
        console.log(this.reponse);
        this.submited=true;
+       this.router.navigate(['/accueil']);
    })
      
  }

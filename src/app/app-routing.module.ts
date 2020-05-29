@@ -19,6 +19,7 @@ const routes: Routes = [
   {path:'authentification', component: AuthentificationComponent},
   {path:'classement', component: PageClassementComponent},
   {path:'page-article-jeu', component: PageArticleJeuComponent},
+  {path:'', component: AccueilComponent},
 ];
 
 @NgModule({

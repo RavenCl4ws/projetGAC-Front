@@ -211,7 +211,7 @@ arrayJeuxAffiche=[];
        this.retourAjoutJeu = data;
       console.log("la reponse:" + this.retourAjoutJeu);
       this.displayToastAdd();
-      location.reload();
+      // location.reload();
   });
   
   }
@@ -224,8 +224,10 @@ arrayJeuxAffiche=[];
     this.http.post("http://localhost:8080/projetGAC/AjoutNoteUtilisateur", infoNote, { responseType: 'text' }).toPromise().then((data: string) => {
        this.retourAjoutNote = data;
       console.log("la reponse:" + this.retourAjoutNote);
-      this.displayToastNote();
+      
       location.reload();
+      this.displayToastNote();
+     
   });
     }
   // this.afficheNote();

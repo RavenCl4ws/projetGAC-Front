@@ -80,10 +80,14 @@ export class EncartProfilComponent implements OnInit {
           //localStorage.setItem('token', this.f.userid.value)
           localStorage.setItem('pseudo', this.reponse.pseudo);
           localStorage.setItem('idUser', this.reponse.id);
-          console.log("this.reponse.monjeu.nomJeu: "+this.reponse.monjeu.nomJeu)
-          localStorage.setItem('nomJeuListe',this.reponse.monjeu.nomJeu)
-          
-          console.log("jeu recup a connexion: "+localStorage.getItem('nomJeuListe'))
+          var obj = { monJeu: undefined };
+          localStorage.setItem('nomJeuListe',"")
+          if(obj["monJeu"] !== undefined){
+            console.log("this.reponse.monjeu.nomJeu: "+this.reponse.monjeu.nomJeu);
+            localStorage.setItem('nomJeuListe',this.reponse.monjeu.nomJeu); 
+            console.log("jeu recup a connexion: "+localStorage.getItem('nomJeuListe'));
+          }
+         
           location.reload();
           // this.router.navigate([this.returnUrl]);
         }
